@@ -77,14 +77,14 @@ export const audioTracks: Track[] = [
   {
     id: "operator-brief",
     label: "Operator brief",
-    src: "/media/operator-brief-v4.mp3",
+    src: "/media/operator-brief-v5.mp3",
     description:
       "A tighter opening read on how Sharpe Systems reshapes the first touch, the proof order, and the buyer mood."
   },
   {
     id: "systems-note",
     label: "Systems note",
-    src: "/media/operator-systems-v4.mp3",
+    src: "/media/operator-systems-v5.mp3",
     description:
       "A second narration focused on why the front end should behave like a guided operating lane instead of a brochure."
   },

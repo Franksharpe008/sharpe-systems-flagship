@@ -43,7 +43,23 @@ export default function ContactPage() {
         <Diagnostic />
       </section>
 
-      <section className="media-mosaic-section compact" data-focus="premium" data-scene="scene-3">
+      <section className="split-story-section" data-focus="premium" data-scene="scene-3">
+        <div className="split-story-copy" data-reveal>
+          <p className="eyebrow">Entry pressure</p>
+          <h2>The contact route should still feel composed and premium while the buyer makes the decision.</h2>
+          <p>
+            The close should not feel administrative. It should feel like the final clean scene in
+            the flagship before the lead enters the build lane.
+          </p>
+        </div>
+        <div className="split-story-visual" data-reveal>
+          <video autoPlay loop muted playsInline poster={stockStills.boardroomNocturne}>
+            <source src={stockVideos.boardroomNocturne} type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section className="media-mosaic-section compact" data-focus="premium" data-scene="scene-4">
         <div className="section-heading" data-reveal>
           <p className="eyebrow">Queue atmosphere</p>
           <h2>The contact lane should still feel premium, alive, and directed while the lead decides to step in.</h2>
@@ -71,7 +87,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="proof-lattice-section" data-focus="premium" data-scene="scene-4">
+      <section className="proof-lattice-section" data-focus="premium" data-scene="scene-5">
         <div className="proof-lattice-grid">
           <article className="proof-lattice-card" data-reveal>
             <span>Audit</span>

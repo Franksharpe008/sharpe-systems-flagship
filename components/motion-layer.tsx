@@ -125,6 +125,13 @@ export function MotionLayer() {
       document.body.classList.toggle("has-scrolled", window.scrollY > 24);
 
       const viewportCenter = window.innerHeight * 0.52;
+      const compactMotion = window.innerWidth <= 840;
+      const shiftRange = compactMotion ? 2.5 : 8;
+      const tiltRange = compactMotion ? 0 : 0.45;
+      const scaleRange = compactMotion ? 0.002 : 0.007;
+      const panRange = compactMotion ? 2 : 6;
+      const zoomBase = compactMotion ? 1.006 : 1.014;
+      const zoomRange = compactMotion ? 0.004 : 0.012;
 
       scrollReactiveTargets.forEach((target, index) => {
         const rect = target.getBoundingClientRect();
@@ -134,9 +141,9 @@ export function MotionLayer() {
         const intensity = 1 - Math.min(1, Math.abs(clamped));
         const direction = index % 2 === 0 ? 1 : -1;
 
-        target.style.setProperty("--scroll-shift", `${(-clamped * 24).toFixed(2)}px`);
-        target.style.setProperty("--scroll-tilt", `${(clamped * 2.2 * direction).toFixed(2)}deg`);
-        target.style.setProperty("--scroll-scale", `${(1 + intensity * 0.018).toFixed(4)}`);
+        target.style.setProperty("--scroll-shift", `${(-clamped * shiftRange).toFixed(2)}px`);
+        target.style.setProperty("--scroll-tilt", `${(clamped * tiltRange * direction).toFixed(2)}deg`);
+        target.style.setProperty("--scroll-scale", `${(1 + intensity * scaleRange).toFixed(4)}`);
       });
 
       mediaTargets.forEach((target, index) => {
@@ -146,8 +153,8 @@ export function MotionLayer() {
         const clamped = Math.max(-1, Math.min(1, distance));
         const direction = index % 2 === 0 ? 1 : -1;
 
-        target.style.setProperty("--media-pan", `${(-clamped * 18 * direction).toFixed(2)}px`);
-        target.style.setProperty("--media-zoom", `${(1.035 + (1 - Math.abs(clamped)) * 0.03).toFixed(4)}`);
+        target.style.setProperty("--media-pan", `${(-clamped * panRange * direction).toFixed(2)}px`);
+        target.style.setProperty("--media-zoom", `${(zoomBase + (1 - Math.abs(clamped)) * zoomRange).toFixed(4)}`);
       });
 
       sceneTargets.forEach((target) => {

@@ -47,7 +47,23 @@ export default function LibraryPage() {
         <PlaybookExplorer entries={playbookEntries} />
       </section>
 
-      <section className="media-mosaic-section compact" data-focus="premium" data-scene="scene-3">
+      <section className="split-story-section" data-focus="premium" data-scene="scene-3">
+        <div className="split-story-copy" data-reveal>
+          <p className="eyebrow">Doctrine read</p>
+          <h2>The framework should feel premium in its own right, not like notes left over after the real design work.</h2>
+          <p>
+            This route exists to show that the thinking has weight. The principles are public,
+            usable, and still styled with the same care as the build itself.
+          </p>
+        </div>
+        <div className="split-story-visual" data-reveal>
+          <video autoPlay loop muted playsInline poster={stockStills.commandFloorLoop}>
+            <source src={stockVideos.commandFloorLoop} type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section className="media-mosaic-section compact" data-focus="premium" data-scene="scene-4">
         <div className="media-mosaic">
           <article className="media-mosaic-tile video-tile large" data-reveal>
             <video autoPlay loop muted playsInline poster={stockStills.authorityOrbit}>

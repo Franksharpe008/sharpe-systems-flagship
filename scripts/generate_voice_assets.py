@@ -15,31 +15,31 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 WORKSPACE_ROOT = PROJECT_ROOT.parent
 PROFILE_PATH = WORKSPACE_ROOT / "output" / "magnus-max-voice-demo" / "speaker_profiles.json"
 OUTPUT_DIR = PROJECT_ROOT / "public" / "media"
-MANIFEST_PATH = OUTPUT_DIR / "voice-manifest-v4.json"
+MANIFEST_PATH = OUTPUT_DIR / "voice-manifest-v5.json"
 VOICE_STACK_DIR = Path.home() / "SharpeAI" / "OpenClawVoice"
 
 LINES = [
     {
         "speaker": "magnus",
-        "slug": "operator-brief-v4",
+        "slug": "operator-brief-v5",
         "display_text": (
-            "Sharpe Systems does not build thin brochure pages. [uv_break] "
+            "Sharp Systems does not build thin brochure pages. [uv_break] "
             "It builds business fronts that feel clear, expensive, and ready to move a qualified buyer."
         ),
     },
     {
         "speaker": "max",
-        "slug": "operator-systems-v4",
+        "slug": "operator-systems-v5",
         "display_text": (
-            "Every route should carry the same pressure. [uv_break] "
-            "Sharper proof. Cleaner motion. Stronger trust. A next move that already makes sense."
+            "Every page should carry the same pressure. [uv_break] "
+            "Cleaner proof. Calmer motion. Stronger trust. A next move that already makes sense."
         ),
     },
 ]
 
 SPEAKER_SETTINGS = {
-    "magnus": {"prompt": "[oral_2][speed_4][break_6]", "temperature": 0.19},
-    "max": {"prompt": "[oral_2][speed_4][break_7]", "temperature": 0.22},
+    "magnus": {"prompt": "[oral_1][speed_4][break_3]", "temperature": 0.14},
+    "max": {"prompt": "[oral_1][speed_4][break_3]", "temperature": 0.16},
 }
 
 

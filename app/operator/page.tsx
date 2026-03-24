@@ -71,7 +71,24 @@ export default function OperatorPage() {
         </div>
       </section>
 
-      <section className="media-mosaic-section compact" data-focus="premium" data-scene="scene-4">
+      <section className="split-story-section" data-focus="premium" data-scene="scene-4">
+        <div className="split-story-copy" data-reveal>
+          <p className="eyebrow">Operator read</p>
+          <h2>Offer pages should feel selective and controlled, not like a menu dressed up as a flagship.</h2>
+          <p>
+            When the route is built correctly, the scope feels intentional, the next move feels
+            reasonable, and the buyer reads the package as the right level of intervention instead
+            of a random stack of services.
+          </p>
+        </div>
+        <div className="split-story-visual" data-reveal>
+          <video autoPlay loop muted playsInline poster={stockStills.authorityOrbit}>
+            <source src={stockVideos.authorityOrbit} type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section className="media-mosaic-section compact" data-focus="premium" data-scene="scene-5">
         <div className="section-heading" data-reveal>
           <p className="eyebrow">Operator atmosphere</p>
           <h2>Offer logic lands harder when the page still feels active, precise, and expensive after the pitch.</h2>

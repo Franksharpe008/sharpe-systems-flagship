@@ -70,16 +70,34 @@ export default function SurfacesPage() {
         <SurfaceGallery scenes={surfaceScenes} />
       </section>
 
-      <section className="showcase-section" data-focus="premium" data-scene="scene-3">
+      <section className="split-story-section" data-focus="premium" data-scene="scene-3">
+        <div className="split-story-copy" data-reveal>
+          <p className="eyebrow">Scene direction</p>
+          <h2>The media route should feel curated, not overloaded.</h2>
+          <p>
+            Better surfaces come from choosing the right motion moments, then letting stills and
+            structure support them instead of fighting for attention.
+          </p>
+        </div>
+        <div className="split-story-visual" data-reveal>
+          <video autoPlay loop muted playsInline poster={stockStills.boardroomNocturne}>
+            <source src={stockVideos.boardroomNocturne} type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section className="showcase-section" data-focus="premium" data-scene="scene-4">
         <div className="showcase-grid wide">
+          <article className="showcase-panel video-panel" data-reveal>
+            <video autoPlay loop muted playsInline poster={stockStills.commandFloorLoop}>
+              <source src={stockVideos.commandFloorLoop} type="video/mp4" />
+            </video>
+          </article>
           <article className="showcase-panel image-panel" data-reveal>
             <img alt="Luxury command-floor visual" src={fusionImages.commandFloor} />
           </article>
           <article className="showcase-panel image-panel" data-reveal>
             <img alt="Abstract authority lattice visual" src={fusionImages.authorityBridge} />
-          </article>
-          <article className="showcase-panel image-panel" data-reveal>
-            <img alt="Premium boardroom-at-night visual" src={fusionImages.boardroomNight} />
           </article>
           <article className="showcase-panel video-panel" data-reveal>
             <video autoPlay loop muted playsInline poster={stockStills.portraitSweep}>
