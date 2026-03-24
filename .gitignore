@@ -7,3 +7,5 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 public/media/**/*.wav
+scripts/__pycache__
+*.pyc
