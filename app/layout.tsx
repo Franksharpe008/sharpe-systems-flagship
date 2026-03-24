@@ -16,9 +16,9 @@ const body = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Sharpe Systems | Authority Built To Move",
+  title: "Sharpe Systems | Premium Surfaces That Move",
   description:
-    "Sharpe Systems rebuilds weak business fronts into high-trust operating systems with decisive positioning, proof, media, and follow-through."
+    "Sharpe Systems rebuilds weak business fronts into sharper authority systems with motion, proof, story, and follow-through that creates real movement."
 };
 
 export default function RootLayout({

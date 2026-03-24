@@ -1,196 +1,272 @@
+import type { CSSProperties } from "react";
+
 import { AudioDock } from "@/components/audio-dock";
 import { Diagnostic } from "@/components/diagnostic";
 import { HeroVideo } from "@/components/hero-video";
+import { MotionLayer } from "@/components/motion-layer";
 
-const operatingLanes = [
+const commandBoards = [
   {
-    title: "Perception",
-    body: "The first ten seconds should feel organized, selective, and premium before the buyer decodes the whole offer."
+    title: "Signal Audit",
+    kicker: "Read the market fast",
+    body: "Find the trust leaks, the weak offer framing, the wrong pacing, and the moments where the business feels smaller than it is."
   },
   {
-    title: "Proof",
-    body: "Real outputs, receipts, and concrete transformation language replace vague credibility theater."
+    title: "Authority Surface",
+    kicker: "Make the front door undeniable",
+    body: "Shape the motion, story, image system, and page hierarchy so the first contact feels expensive, clear, and in control."
   },
   {
-    title: "Follow-through",
-    body: "Forms, summaries, and recommendations turn curiosity into a guided next step instead of a dead inbox entry."
-  },
-  {
-    title: "Momentum",
-    body: "The system keeps moving after launch so the business does not stall at aesthetics."
+    title: "Action Path",
+    kicker: "Turn attention into movement",
+    body: "Build the qualification lane, the follow-up logic, and the next-step structure that keeps the experience alive after the first hit."
   }
 ];
 
-const transformationRows = [
+const architectureLanes = [
   {
-    before: "Generic, forgettable, and visually noisy.",
-    after: "Structured, selective, and instantly easier to trust."
+    title: "Research-led category positioning",
+    body: "The page should read like it understands the market, the buyer hesitation, and the angle worth paying attention to."
   },
   {
-    before: "Everything is said at once, so nothing lands.",
-    after: "The message unfolds in the order a buyer actually needs it."
+    title: "Premium media that feels authored",
+    body: "Motion, image, voice, and score should sharpen perception instead of reading like filler glued onto a generic layout."
   },
   {
-    before: "Attention dies at the first weak touchpoint.",
-    after: "Media, proof, and action paths reinforce each other."
+    title: "Live proof with receipts",
+    body: "The work should show real shipped surfaces, real verification, and real transformation language instead of fake praise."
+  },
+  {
+    title: "Follow-through that behaves like software",
+    body: "Qualification, summaries, recommendations, and next actions should move with precision after the page wins attention."
   }
 ];
 
 const proofLedger = [
   {
     name: "Tree Service Premium Rebuild",
-    result: "Converted a dated local presence into a sharper premium front door.",
+    result: "Took a dated local-service presence and made the first touch feel organized, selective, and higher-value.",
+    image: "/proof/tree-service-proof.png",
     link: "https://what-about-bob-tree-service-premium.vercel.app/"
   },
   {
-    name: "Law Firm Flagship Demo",
-    result: "Built a more authoritative legal-service presence with live delivery proof.",
-    link: "https://tailorbytez-sandy-epstein-law-2026.vercel.app"
+    name: "Premium Engine Capability Surface",
+    result: "Turned system capability into a cleaner authority story with richer motion and a stronger conversion rhythm.",
+    image: "/proof/premium-engine-proof.png",
+    link: "https://authority-cinema-agency-flagship-edpm2mqpp.vercel.app/"
   },
   {
-    name: "Flagship Motion Prototype",
-    result: "Proved the live browser plus remote media lane with a real render receipt.",
-    link: "https://authority-cinema-agency-flagship-edpm2mqpp.vercel.app/"
+    name: "Real Estate Mockup Authority Pass",
+    result: "Showed how a weaker business surface can be reframed into something calmer, sharper, and easier to trust immediately.",
+    image: "/proof/realty-proof.png",
+    link: "https://godwyn-realty-mockup-2026-03-17.vercel.app/"
   }
 ];
 
 const offers = [
   {
-    name: "Operator Audit",
-    summary: "For businesses that need a precise read on what is weakening trust, clarity, or follow-through.",
-    outcome: "Priority map + decisive first move"
+    name: "Signal Audit",
+    summary: "A decisive read on what is weakening trust, clarity, pricing power, or follow-through right now.",
+    outcome: "A priority map plus the highest-leverage first move"
   },
   {
-    name: "Conversion Rebuild",
-    summary: "For businesses with real demand but a weak front door, scattered message, or poor booking flow.",
-    outcome: "Sharper message + better first impression"
+    name: "Authority Rebuild",
+    summary: "A new front door for businesses whose current surface undersells the real quality of what they do.",
+    outcome: "A sharper experience that earns more attention on contact"
   },
   {
-    name: "Authority System",
-    summary: "For owners who want the entire business surface to feel tighter, more premium, and easier to choose.",
-    outcome: "A real operating system for perception and action"
+    name: "Command System",
+    summary: "A fuller business surface with media, qualification logic, proof, and operator-grade follow-through built to move.",
+    outcome: "A flagship system designed to create real commercial momentum"
   }
+];
+
+const marqueeWords = [
+  "Research",
+  "Story",
+  "Motion",
+  "Voice",
+  "Proof",
+  "Qualification",
+  "Follow-through"
 ];
 
 const audioTracks = [
   {
-    id: "operator-brief",
-    label: "Operator brief",
-    src: "/media/operator-brief.mp3",
-    description: "A short optional briefing for visitors who want the thesis in voice."
+    id: "field-brief",
+    label: "Field brief",
+    src: "/media/operator-brief-v2.mp3",
+    description: "A short operator-grade briefing on what Sharpe Systems is actually built to do."
+  },
+  {
+    id: "decision-note",
+    label: "Decision note",
+    src: "/media/decision-note-v2.mp3",
+    description: "A second voice pass focused on what changes when the business stops underselling itself."
   },
   {
     id: "score-bed",
     label: "Score bed",
     src: "/media/score-bed.mp3",
-    description: "A restrained optional score layer for a guided-boardroom feel."
+    description: "A restrained cinematic score layer for a guided flagship read."
   }
 ];
 
+function staggerStyle(index: number): CSSProperties {
+  return { "--delay": `${index * 0.08}s` } as CSSProperties;
+}
+
+function AnimatedWord({ word }: { word: string }) {
+  return (
+    <span aria-label={word} className="animated-word">
+      {Array.from(word).map((letter, index) => (
+        <span
+          aria-hidden="true"
+          className="letter"
+          key={`${letter}-${index}`}
+          style={{ "--index": index } as CSSProperties}
+        >
+          {letter}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export default function Page() {
   return (
-    <main className="site-shell">
-      <header className="topbar">
-        <div className="brand-mark">
-          <span className="brand-dot" />
-          Sharpe Systems
-        </div>
-        <nav className="topnav">
-          <a href="#system">System</a>
+    <main className="flagship-shell">
+      <MotionLayer />
+
+      <header className="site-nav" data-reveal>
+        <a className="brand-lockup" href="#top">
+          <span className="brand-orb" />
+          <span className="brand-copy">
+            <strong>Sharpe Systems</strong>
+            <span>Authority built to move</span>
+          </span>
+        </a>
+        <nav className="nav-links">
+          <a href="#command">Command</a>
           <a href="#proof">Proof</a>
-          <a href="#offers">Offers</a>
-          <a href="#diagnostic">Diagnostic</a>
+          <a href="#engage">Engage</a>
         </nav>
-        <a className="topbar-cta" href="#diagnostic">
+        <a className="nav-cta" href="#diagnostic">
           Start the diagnostic
         </a>
       </header>
 
-      <section className="hero-section">
-        <div className="hero-copy">
-          <p className="eyebrow">Business operating systems for service companies</p>
-          <h1>
-            Turn a weak
-            <span> front door </span>
-            into a system people trust on contact.
+      <section className="hero-shell" data-focus="premium" data-scene="scene-1" id="top">
+        <div className="hero-video-shell" aria-hidden="true">
+          <HeroVideo poster="/media/hero-poster.svg" src="/media/hero-loop.mp4" />
+          <div className="hero-veil" />
+          <div className="hero-gridwash" />
+        </div>
+
+        <div className="hero-content" data-reveal>
+          <p className="eyebrow">Premium business systems for companies that need to feel bigger now</p>
+          <h1 className="hero-title">
+            Make the first touch feel
+            <br />
+            <AnimatedWord word="undeniable" />
           </h1>
           <p className="hero-summary">
-            Sharpe Systems rebuilds the business surface that people actually feel: the message,
-            the media, the proof, the motion, and the path that turns interest into a real next
-            step.
+            Sharpe Systems rebuilds the business surface people actually feel: the category read,
+            the story, the motion, the proof, and the next step that turns attention into a real
+            move.
           </p>
           <div className="hero-actions">
             <a className="primary-button" href="#diagnostic">
               Diagnose the right lane
             </a>
-            <a className="secondary-button" href="#proof">
-              See the proof ledger
+            <a className="ghost-button" href="#proof">
+              Watch the proof stack
             </a>
           </div>
+
           <div className="hero-metrics">
-            <div>
-              <span>Signal</span>
-              <strong>Sharper first impression</strong>
-            </div>
-            <div>
-              <span>Proof</span>
-              <strong>Receipts over claims</strong>
-            </div>
-            <div>
-              <span>Follow-through</span>
+            <article data-reveal style={staggerStyle(0)}>
+              <span>Read</span>
+              <strong>Research before style</strong>
+            </article>
+            <article data-reveal style={staggerStyle(1)}>
+              <span>Feel</span>
+              <strong>Motion with intent</strong>
+            </article>
+            <article data-reveal style={staggerStyle(2)}>
+              <span>Move</span>
               <strong>Action after attention</strong>
-            </div>
+            </article>
           </div>
         </div>
-        <div className="hero-panel">
-          <div className="hero-frame">
-            <HeroVideo poster="/media/hero-poster.svg" src="/media/hero-loop.mp4" />
-            <div className="hero-overlay-card north">
-              <span>Mode</span>
-              <strong>Authority rebuild</strong>
-            </div>
-            <div className="hero-overlay-card south">
-              <span>Focus</span>
-              <strong>Trust, clarity, conversion</strong>
-            </div>
-          </div>
+
+        <aside className="hero-sidecard" data-reveal>
+          <p className="eyebrow">Operator read</p>
+          <h2>The page should act like a live system, not a static brochure.</h2>
+          <p>
+            Better businesses lose money when the first touch feels cheaper, slower, weaker, or
+            less certain than the real operation behind it.
+          </p>
+          <ul className="hero-side-list">
+            <li>Sharper positioning on contact</li>
+            <li>Premium media without generic noise</li>
+            <li>Qualification that behaves like software</li>
+          </ul>
+        </aside>
+
+        <div className="scroll-cue" aria-hidden="true">
+          <span />
+          <span />
+          <span />
         </div>
       </section>
 
-      <section className="transformation-section" id="system">
-        <div className="section-heading">
-          <p className="eyebrow">The shift</p>
-          <h2>What changes when the business starts feeling deliberate.</h2>
+      <section className="marquee-band" data-focus="premium" data-scene="scene-1">
+        <div className="marquee-track">
+          {Array.from({ length: 2 }).map((_, pass) => (
+            <div className="marquee-group" key={pass}>
+              {marqueeWords.map((word) => (
+                <span className="marquee-word" key={`${pass}-${word}`}>
+                  {word}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="command-section" data-focus="appointments" data-scene="scene-2" id="command">
+        <div className="section-heading" data-reveal>
+          <p className="eyebrow">Command surface</p>
+          <h2>Every flagship move starts with a stronger read, not louder decoration.</h2>
           <p>
-            The real rebuild is not decorative. It changes how quickly a buyer understands what
-            the business is, why it matters, and whether the next step feels worth taking.
+            The point is not to make the business look futuristic. The point is to make the
+            business feel more organized, more credible, and more valuable before the buyer has to
+            work for it.
           </p>
         </div>
-        <div className="transformation-grid">
-          {transformationRows.map((row) => (
-            <article className="transition-row" key={row.before}>
-              <div>
-                <span className="transition-label">Before</span>
-                <p>{row.before}</p>
-              </div>
-              <div>
-                <span className="transition-label">After</span>
-                <p>{row.after}</p>
-              </div>
+
+        <div className="command-grid">
+          {commandBoards.map((board, index) => (
+            <article className="command-card" data-reveal key={board.title} style={staggerStyle(index)}>
+              <span className="command-index">0{index + 1}</span>
+              <p className="command-kicker">{board.kicker}</p>
+              <h3>{board.title}</h3>
+              <p>{board.body}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="lanes-section">
-        <div className="section-heading">
-          <p className="eyebrow">The machine</p>
-          <h2>Four lanes move together so the front end stops fighting the business.</h2>
+      <section className="architecture-section" data-focus="recurring" data-scene="scene-3">
+        <div className="section-heading" data-reveal>
+          <p className="eyebrow">System architecture</p>
+          <h2>The strongest business surfaces coordinate signal, proof, media, and follow-through.</h2>
         </div>
-        <div className="lane-grid">
-          {operatingLanes.map((lane, index) => (
-            <article className="lane-card" key={lane.title}>
-              <span className="lane-index">0{index + 1}</span>
+
+        <div className="architecture-grid">
+          {architectureLanes.map((lane, index) => (
+            <article className="architecture-card" data-reveal key={lane.title} style={staggerStyle(index)}>
               <h3>{lane.title}</h3>
               <p>{lane.body}</p>
             </article>
@@ -198,19 +274,20 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="proof-section" id="proof">
-        <div className="section-heading">
-          <p className="eyebrow">Proof ledger</p>
-          <h2>Real surfaces. Real outputs. Real receipts.</h2>
+      <section className="proof-section" data-focus="premium" data-scene="scene-3" id="proof">
+        <div className="section-heading" data-reveal>
+          <p className="eyebrow">Proof stack</p>
+          <h2>Real surfaces. Real receipts. Real transformations.</h2>
           <p>
-            Proof should show transformed business surfaces and verified delivery, not a wall of
-            invented praise.
+            The proof should show shipped work and stronger business feeling, not a wall of claims
+            that asks the buyer to imagine the result.
           </p>
         </div>
+
         <div className="proof-grid">
-          {proofLedger.map((item) => (
-            <article className="proof-card" key={item.name}>
-              <div className="proof-art" aria-hidden="true" />
+          {proofLedger.map((item, index) => (
+            <article className="proof-card" data-reveal key={item.name} style={staggerStyle(index)}>
+              <div className="proof-shot" style={{ backgroundImage: `url(${item.image})` }} />
               <div className="proof-copy">
                 <span className="proof-kicker">Shipped work</span>
                 <h3>{item.name}</h3>
@@ -224,15 +301,16 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="offers-section" id="offers">
-        <div className="section-heading">
+      <section className="engagement-section" data-focus="appointments" data-scene="scene-4" id="engage">
+        <div className="section-heading" data-reveal>
           <p className="eyebrow">Engagement lanes</p>
-          <h2>Choose the size of the move, not a random package.</h2>
+          <h2>Choose the size of the move instead of getting trapped in generic packages.</h2>
         </div>
+
         <div className="offer-grid">
-          {offers.map((offer) => (
-            <article className="offer-card" key={offer.name}>
-              <h3>{offer.name}</h3>
+          {offers.map((offer, index) => (
+            <article className="offer-card" data-reveal key={offer.name} style={staggerStyle(index)}>
+              <p className="offer-name">{offer.name}</p>
               <p>{offer.summary}</p>
               <div className="offer-outcome">
                 <span>Outcome</span>
@@ -243,18 +321,27 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="diagnostic-section" id="diagnostic">
+      <section className="diagnostic-section" data-focus="recurring" data-scene="scene-4" id="diagnostic">
         <Diagnostic />
       </section>
 
-      <footer className="site-footer">
-        <div>
+      <footer className="site-footer" data-focus="premium" data-scene="scene-4">
+        <div className="footer-copy" data-reveal>
           <p className="eyebrow">Sharpe Systems</p>
-          <h2>Build the business surface people can trust fast.</h2>
+          <h2>The business should feel as sharp as the work behind it.</h2>
+          <p>
+            If the current surface is leaking trust, muting quality, or wasting qualified
+            attention, the rebuild should start now.
+          </p>
         </div>
-        <a className="primary-button" href="mailto:franksharpe008@gmail.com">
-          franksharpe008@gmail.com
-        </a>
+        <div className="footer-actions" data-reveal>
+          <a className="primary-button" href="#diagnostic">
+            Start the diagnostic
+          </a>
+          <a className="ghost-button" href="mailto:franksharpe008@gmail.com">
+            franksharpe008@gmail.com
+          </a>
+        </div>
       </footer>
 
       <AudioDock tracks={audioTracks} />

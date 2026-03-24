@@ -7,6 +7,7 @@ type Recommendation = {
   focus: string;
   nextStep: string;
   summary: string;
+  followUp: string;
 };
 
 function buildRecommendation(formData: Record<string, string>): Recommendation {
@@ -14,6 +15,7 @@ function buildRecommendation(formData: Record<string, string>): Recommendation {
   const budget = formData.budgetBand;
   const bottleneck = formData.bottleneck;
   const need = formData.serviceNeed;
+  const company = formData.company || "your company";
 
   if (
     (urgency === "immediate" || urgency === "this-month") &&
@@ -21,11 +23,12 @@ function buildRecommendation(formData: Record<string, string>): Recommendation {
     (bottleneck === "trust" || bottleneck === "conversion" || need === "full-system")
   ) {
     return {
-      lane: "Authority System",
-      focus: "Full business-front rebuild",
-      nextStep: "Operator call + architecture sprint",
+      lane: "Command System",
+      focus: "Full authority rebuild with media and follow-through",
+      nextStep: "Operator call + system architecture sprint",
       summary:
-        "You need the full authority system: positioning, front-end transformation, proof structure, and a follow-through path that closes the trust gap quickly."
+        "The business likely needs a full command surface: sharper positioning, a premium first touch, stronger proof sequencing, and an action path that closes hesitation quickly.",
+      followUp: `Sharpe Systems read for ${company}: the strongest move is a full command-system build. We would rebuild the authority surface, tighten the proof story, and structure a cleaner qualification path so attention turns into qualified movement faster.`
     };
   }
 
@@ -36,43 +39,57 @@ function buildRecommendation(formData: Record<string, string>): Recommendation {
     budget === "7-15k"
   ) {
     return {
-      lane: "Conversion Rebuild",
-      focus: "Message, structure, and front-door clarity",
-      nextStep: "Conversion audit + rebuild plan",
+      lane: "Authority Rebuild",
+      focus: "Message, motion, and first-touch trust",
+      nextStep: "Conversion audit + flagship rebuild plan",
       summary:
-        "You likely do not need more noise. You need a stronger first impression, a cleaner offer path, and a site structure that makes the business easier to trust."
+        "The highest-leverage move is a stronger front door. The page, pacing, story, and media should make the business feel clearer and more valuable immediately.",
+      followUp: `Sharpe Systems read for ${company}: the fastest commercial gain is an authority rebuild. The site and message need to feel sharper, more selective, and easier to trust before more traffic is pushed into the system.`
     };
   }
 
   return {
-    lane: "Operator Audit",
-    focus: "Diagnostic read on what is broken",
+    lane: "Signal Audit",
+    focus: "Diagnostic read on trust and conversion leaks",
     nextStep: "Evidence review + priority map",
     summary:
-      "The fastest first move is an operator-grade audit that identifies the biggest trust, clarity, and follow-through gaps before a full rebuild is scoped."
+      "The smartest first move is a precise audit that identifies the biggest trust, clarity, and follow-through gaps before a larger flagship build is scoped.",
+    followUp: `Sharpe Systems read for ${company}: start with a signal audit. We should isolate the trust leaks, the category-positioning gaps, and the weak spots in the current follow-through path before deciding the full build lane.`
   };
 }
 
 export function Diagnostic() {
   const [result, setResult] = useState<Recommendation | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const payload = Object.fromEntries(formData.entries()) as Record<string, string>;
+    setCopied(false);
     setResult(buildRecommendation(payload));
   };
 
+  const handleCopy = async () => {
+    if (!result) {
+      return;
+    }
+
+    await navigator.clipboard.writeText(result.followUp);
+    setCopied(true);
+  };
+
   return (
-    <section className="diagnostic-card">
+    <section className="diagnostic-card" data-reveal>
       <div className="section-heading">
         <p className="eyebrow">Fit diagnostic</p>
-        <h2>Tell the system what is actually broken.</h2>
+        <h2>Tell the system what is actually weakening the business right now.</h2>
         <p>
-          This is not a generic contact form. It is a structured read on the gap between how the
-          business feels now and how it needs to perform.
+          This is a structured read on the gap between how the business feels now and how it needs
+          to perform when the right buyer lands on it.
         </p>
       </div>
+
       <form className="diagnostic-form" onSubmit={handleSubmit}>
         <label>
           Name
@@ -89,10 +106,10 @@ export function Diagnostic() {
         <label>
           What do you need most?
           <select defaultValue="rebuild" name="serviceNeed">
-            <option value="rebuild">A stronger front door</option>
+            <option value="rebuild">A stronger business surface</option>
             <option value="proof">Better proof and positioning</option>
             <option value="automation">Better follow-through</option>
-            <option value="full-system">A complete operating system</option>
+            <option value="full-system">A complete command system</option>
           </select>
         </label>
         <label>
@@ -116,9 +133,9 @@ export function Diagnostic() {
         <label>
           Main bottleneck
           <select defaultValue="site" name="bottleneck">
-            <option value="site">The site feels weak</option>
+            <option value="site">The surface feels weak</option>
             <option value="message">The message is unclear</option>
-            <option value="trust">The brand does not feel credible enough</option>
+            <option value="trust">The business does not feel credible enough</option>
             <option value="conversion">Attention is not turning into qualified calls</option>
           </select>
         </label>
@@ -126,6 +143,7 @@ export function Diagnostic() {
           Diagnose the right lane
         </button>
       </form>
+
       {result ? (
         <div className="diagnostic-result">
           <p className="result-label">Recommended lane</p>
@@ -140,6 +158,15 @@ export function Diagnostic() {
               <span>Next step</span>
               <strong>{result.nextStep}</strong>
             </div>
+          </div>
+          <div className="follow-up-card">
+            <div>
+              <p className="eyebrow">Follow-up draft</p>
+              <p>{result.followUp}</p>
+            </div>
+            <button className="ghost-button" onClick={handleCopy} type="button">
+              {copied ? "Copied" : "Copy summary"}
+            </button>
           </div>
         </div>
       ) : null}
