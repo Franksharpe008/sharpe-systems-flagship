@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "media:render": "python3 scripts/render_section_media.py",
+    "voice:render": "/Users/franksharpe/SharpeAI/OpenClawVoice/venv/bin/python scripts/generate_voice_assets.py",
+    "validate:comet": "node scripts/validate_comet.mjs"
   },
   "dependencies": {
     "next": "latest",

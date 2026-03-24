@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import type { HeroMetric } from "@/lib/site";
+
 import { HeroVideo } from "./hero-video";
 
 type PageHeroProps = {
@@ -10,6 +12,10 @@ type PageHeroProps = {
   poster: string;
   actions?: ReactNode;
   side?: ReactNode;
+  metrics?: HeroMetric[];
+  rail?: ReactNode;
+  spotlight?: ReactNode;
+  variant?: "default" | "centered" | "proof" | "signal" | "editorial";
 };
 
 export function PageHero({
@@ -19,10 +25,18 @@ export function PageHero({
   mediaSrc,
   poster,
   actions,
-  side
+  side,
+  metrics,
+  rail,
+  spotlight,
+  variant = "default"
 }: PageHeroProps) {
   return (
-    <section className="page-hero-shell hero-shell" data-focus="premium" data-scene="scene-1">
+    <section
+      className={`page-hero-shell hero-shell hero-variant-${variant}`}
+      data-focus="premium"
+      data-scene="scene-1"
+    >
       <div className="hero-video-shell" aria-hidden="true">
         <HeroVideo poster={poster} src={mediaSrc} />
         <div className="hero-veil" />
@@ -34,12 +48,29 @@ export function PageHero({
         <div className="page-hero-title">{title}</div>
         <p className="hero-summary page-hero-summary">{summary}</p>
         {actions ? <div className="hero-actions">{actions}</div> : null}
+        {metrics?.length ? (
+          <div className="hero-metrics">
+            {metrics.map((metric) => (
+              <article key={`${metric.label}-${metric.value}`}>
+                <span>{metric.label}</span>
+                <strong>{metric.value}</strong>
+              </article>
+            ))}
+          </div>
+        ) : null}
+        {rail ? <div className="hero-rail">{rail}</div> : null}
       </div>
 
       {side ? (
         <aside className="hero-sidecard page-hero-sidecard" data-reveal>
           {side}
         </aside>
+      ) : null}
+
+      {spotlight ? (
+        <div className="hero-spotlight" data-reveal>
+          {spotlight}
+        </div>
       ) : null}
 
       <div className="scroll-cue" aria-hidden="true">

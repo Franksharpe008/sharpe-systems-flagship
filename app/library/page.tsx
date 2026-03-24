@@ -1,27 +1,10 @@
 import Link from "next/link";
 
+import { KineticHeading } from "@/components/kinetic-heading";
 import { PageHero } from "@/components/page-hero";
+import { PlaybookExplorer } from "@/components/playbook-explorer";
 import { SiteShell } from "@/components/site-shell";
-import { fusionImages, stockStills, stockVideos } from "@/lib/site";
-
-const libraryEntries = [
-  {
-    title: "Proof framing",
-    body: "How to present transformation so the buyer feels the commercial difference instead of reading empty adjectives."
-  },
-  {
-    title: "Hero pacing",
-    body: "How to slow the first screen down just enough that it feels expensive instead of frantic."
-  },
-  {
-    title: "Voice layer",
-    body: "How operator-style narration can guide a flagship read without turning the page into a gimmick."
-  },
-  {
-    title: "Follow-through",
-    body: "How the page can continue the sale after the first scroll by routing the right lead into the right lane."
-  }
-];
+import { fusionImages, libraryMetrics, playbookEntries, stockStills, stockVideos } from "@/lib/site";
 
 export default function LibraryPage() {
   return (
@@ -38,8 +21,9 @@ export default function LibraryPage() {
           </>
         }
         eyebrow="Library"
-        mediaSrc={stockVideos.tunnel}
-        poster={stockStills.tunnel}
+        mediaSrc={stockVideos.portraitSweep}
+        metrics={libraryMetrics}
+        poster={stockStills.portraitSweep}
         side={
           <>
             <p className="eyebrow">What this holds</p>
@@ -47,7 +31,12 @@ export default function LibraryPage() {
           </>
         }
         summary="The library page acts like a living internal playbook translated into a public-facing premium knowledge surface."
-        title={<h1 className="hero-title page-title-tight">Keep the doctrine. Refresh the execution.</h1>}
+        title={
+          <h1 className="hero-title page-title-tight">
+            <KineticHeading accent="execution" lines={["Keep the doctrine.", "Refresh the execution."]} />
+          </h1>
+        }
+        variant="editorial"
       />
 
       <section className="showcase-section" data-focus="premium" data-scene="scene-2">
@@ -55,17 +44,34 @@ export default function LibraryPage() {
           <p className="eyebrow">Playbook fragments</p>
           <h2>Principles that can be repeated without repeating the exact same page.</h2>
         </div>
-        <div className="architecture-grid">
-          {libraryEntries.map((entry) => (
-            <article className="architecture-card" data-reveal key={entry.title}>
-              <h3>{entry.title}</h3>
-              <p>{entry.body}</p>
-            </article>
-          ))}
-        </div>
-        <div className="showcase-grid">
-          <article className="showcase-panel image-panel" data-reveal>
+        <PlaybookExplorer entries={playbookEntries} />
+      </section>
+
+      <section className="media-mosaic-section compact" data-focus="premium" data-scene="scene-3">
+        <div className="media-mosaic">
+          <article className="media-mosaic-tile video-tile large" data-reveal>
+            <video autoPlay loop muted playsInline poster={stockStills.authorityOrbit}>
+              <source src={stockVideos.authorityOrbit} type="video/mp4" />
+            </video>
+            <div className="tile-caption">
+              <span>Doctrine in motion</span>
+              <strong>Reusable principles still need a live visual pulse.</strong>
+            </div>
+          </article>
+          <article className="media-mosaic-tile image-tile" data-reveal>
             <img alt="Founder portrait visual" src={fusionImages.signalPortrait} />
+          </article>
+          <article className="media-mosaic-tile note-tile" data-reveal>
+            <p className="eyebrow">Doctrine note</p>
+            <h3>Reusable does not mean repetitive. It means the structure survives while the expression stays fresh.</h3>
+            <p>
+              That is how the workflow becomes a real premium system instead of a single pretty one-off.
+            </p>
+          </article>
+          <article className="media-mosaic-tile video-tile" data-reveal>
+            <video autoPlay loop muted playsInline poster={stockStills.portraitSweep}>
+              <source src={stockVideos.portraitSweep} type="video/mp4" />
+            </video>
           </article>
         </div>
       </section>

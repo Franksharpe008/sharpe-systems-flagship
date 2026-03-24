@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { AnimatedWord } from "@/components/animated-word";
+import { KineticHeading } from "@/components/kinetic-heading";
 import { PageHero } from "@/components/page-hero";
 import { SiteShell } from "@/components/site-shell";
-import { fusionImages, stockStills, stockVideos } from "@/lib/site";
+import { fusionImages, homeMetrics, stockStills, stockVideos } from "@/lib/site";
 
 const advantageCards = [
   {
@@ -57,31 +57,57 @@ export default function HomePage() {
           </>
         }
         eyebrow="Sharpe Systems flagship"
-        mediaSrc={stockVideos.boardroom}
-        poster={stockStills.boardroom}
+        mediaSrc={stockVideos.heroLoop}
+        metrics={homeMetrics}
+        poster={stockStills.heroLoop}
+        rail={
+          <div className="hero-rail-grid">
+            <article className="hero-rail-card">
+              <span>Read</span>
+              <strong>Category pressure before design taste</strong>
+            </article>
+            <article className="hero-rail-card">
+              <span>Build</span>
+              <strong>Media, proof, and motion in one authored lane</strong>
+            </article>
+            <article className="hero-rail-card">
+              <span>Route</span>
+              <strong>Qualified attention into a real next move</strong>
+            </article>
+          </div>
+        }
         side={
           <>
             <p className="eyebrow">What changes here</p>
-            <h2>The digital front starts closing the gap between what the business is and how it feels.</h2>
+            <h2>The digital front stops underselling the operation behind it.</h2>
             <p>
-              Better story, better proof, better pacing, better movement. The buyer should feel all
-              of that before the first call.
+              Sharpe Systems rebuilds the first contact so the buyer feels command, proof, rhythm,
+              and follow-through before a call is even booked.
             </p>
             <ul className="hero-side-list">
-              <li>Research-led narrative</li>
-              <li>Premium visual surfaces</li>
-              <li>Sharper lead progression</li>
+              <li>Research-led positioning</li>
+              <li>Multi-layered motion and media</li>
+              <li>Qualification that behaves like software</li>
             </ul>
           </>
         }
-        summary="Sharpe Systems rebuilds business fronts into stronger digital environments with richer motion, better proof, sharper media, and a cleaner path from attention to action."
+        spotlight={
+          <article className="hero-spotlight-card">
+            <p className="eyebrow">Active surface</p>
+            <strong>Vibrant multi-page flagship system</strong>
+            <p>
+              Built to feel denser, more fluid, and more alive on every route instead of saving the
+              effort for the hero alone.
+            </p>
+          </article>
+        }
+        summary="Sharpe Systems builds premium business fronts with cinematic motion, custom visual direction, stronger proof architecture, and a cleaner path from first attention to qualified action."
         title={
           <h1 className="hero-title">
-            Build a flagship that feels
-            <br />
-            <AnimatedWord word="earned" />
+            <KineticHeading accent="earned" lines={["Build the front end", "that feels earned"]} />
           </h1>
         }
+        variant="signal"
       />
 
       <section className="marquee-band" data-focus="premium" data-scene="scene-1">
@@ -107,10 +133,43 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="media-mosaic-section" data-focus="premium" data-scene="scene-2">
+        <div className="section-heading" data-reveal>
+          <p className="eyebrow">Atmosphere + structure</p>
+          <h2>The page should feel like a live environment, not a single good hero with weaker rooms behind it.</h2>
+        </div>
+        <div className="media-mosaic">
+          <article className="media-mosaic-tile video-tile large" data-reveal>
+            <video autoPlay loop muted playsInline poster={stockStills.commandGrid}>
+              <source src={stockVideos.commandGrid} type="video/mp4" />
+            </video>
+            <div className="tile-caption">
+              <span>Command motion</span>
+              <strong>Section loops keep the read alive after the hero.</strong>
+            </div>
+          </article>
+          <article className="media-mosaic-tile image-tile" data-reveal>
+            <img alt="Sharpe Systems authority bridge" src={fusionImages.authorityBridge} />
+          </article>
+          <article className="media-mosaic-tile image-tile" data-reveal>
+            <img alt="Sharpe Systems boardroom night" src={fusionImages.boardroomNight} />
+          </article>
+          <article className="media-mosaic-tile video-tile" data-reveal>
+            <video autoPlay loop muted playsInline poster={stockStills.signalPulse}>
+              <source src={stockVideos.signalPulse} type="video/mp4" />
+            </video>
+            <div className="tile-caption">
+              <span>Pulse control</span>
+              <strong>Motion should increase authority, not noise.</strong>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section className="command-section" data-focus="appointments" data-scene="scene-2">
         <div className="section-heading" data-reveal>
           <p className="eyebrow">Front-end advantage</p>
-          <h2>A better site is not just prettier. It makes the business easier to trust, easier to remember, and easier to choose.</h2>
+          <h2>A better flagship does more than look expensive. It shapes how the business is interpreted.</h2>
         </div>
         <div className="command-grid">
           {advantageCards.map((card) => (
@@ -123,10 +182,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="showcase-section" data-focus="premium" data-scene="scene-2">
+      <section className="showcase-section" data-focus="premium" data-scene="scene-3">
         <div className="section-heading" data-reveal>
           <p className="eyebrow">Fresh visual direction</p>
-          <h2>Custom imagery and real motion give the front end its own point of view.</h2>
+          <h2>Custom imagery, tighter placement, and more video moments give the build a stronger point of view.</h2>
         </div>
         <div className="showcase-grid">
           <article className="showcase-panel image-panel" data-reveal>
@@ -135,13 +194,35 @@ export default function HomePage() {
           <article className="showcase-panel image-panel tall" data-reveal>
             <img alt="Sharpe Systems portrait visual" src={fusionImages.signalPortrait} />
           </article>
-          <article className="showcase-panel image-panel" data-reveal>
-            <img alt="Sharpe Systems authority bridge visual" src={fusionImages.authorityBridge} />
+          <article className="showcase-panel video-panel" data-reveal>
+            <video autoPlay loop muted playsInline poster={stockStills.proofCascade}>
+              <source src={stockVideos.proofCascade} type="video/mp4" />
+            </video>
           </article>
         </div>
       </section>
 
-      <section className="architecture-section" data-focus="recurring" data-scene="scene-3">
+      <section className="proof-lattice-section" data-focus="premium" data-scene="scene-3">
+        <div className="proof-lattice-grid">
+          <article className="proof-lattice-card" data-reveal>
+            <span>01</span>
+            <strong>Distinct page heroes</strong>
+            <p>Every route should feel like a new scene, not the same opener in a different folder.</p>
+          </article>
+          <article className="proof-lattice-card" data-reveal>
+            <span>02</span>
+            <strong>Media beyond the fold</strong>
+            <p>Video and still placement should keep authority alive after the first impression.</p>
+          </article>
+          <article className="proof-lattice-card" data-reveal>
+            <span>03</span>
+            <strong>Functional qualification</strong>
+            <p>The surface should recommend the right lane instead of dumping every lead into one form.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="architecture-section" data-focus="recurring" data-scene="scene-4">
         <div className="section-heading" data-reveal>
           <p className="eyebrow">Signature moves</p>
           <h2>Everything on the page should support value perception, not dilute it.</h2>
@@ -156,10 +237,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="cta-strip" data-focus="premium" data-scene="scene-4">
+      <section className="cta-strip" data-focus="premium" data-scene="scene-5">
         <div className="cta-strip-copy" data-reveal>
           <p className="eyebrow">Tour the system</p>
-          <h2>Walk the full method, the work, the media surfaces, and the operator lane.</h2>
+          <h2>Walk the method, the proof, the media surfaces, the operator logic, and the live diagnostic.</h2>
         </div>
         <div className="cta-strip-links" data-reveal>
           <Link className="ghost-button" href="/method">

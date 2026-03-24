@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Script from "next/script";
 
 declare global {
@@ -12,6 +13,7 @@ declare global {
 }
 
 export function MotionLayer() {
+  const pathname = usePathname();
   const [paperReady, setPaperReady] = useState(false);
   const [directorReady, setDirectorReady] = useState(false);
 
@@ -27,6 +29,47 @@ export function MotionLayer() {
 
     const revealTargets = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     const sceneTargets = Array.from(document.querySelectorAll<HTMLElement>("[data-scene]"));
+    const scrollReactiveTargets = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        [
+          "[data-reveal]",
+          ".hero-sidecard",
+          ".hero-spotlight",
+          ".hero-metrics article",
+          ".hero-rail-card",
+          ".footer-column",
+          ".footer-copy",
+          ".footer-media-card",
+          ".footer-media-stack",
+          ".site-footer-shell",
+          ".cta-strip",
+          ".split-story-copy",
+          ".split-story-visual"
+        ].join(",")
+      )
+    );
+    const mediaTargets = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        [
+          ".hero-video",
+          ".showcase-panel img",
+          ".showcase-panel video",
+          ".media-mosaic-tile img",
+          ".media-mosaic-tile video",
+          ".case-command-media img",
+          ".case-command-media video",
+          ".surface-stage-media img",
+          ".surface-stage-media video",
+          ".method-stage-media video",
+          ".split-story-visual img",
+          ".split-story-visual video",
+          ".footer-media-card img",
+          ".footer-media-card video"
+        ].join(",")
+      )
+    );
+
+    revealTargets.forEach((target) => target.classList.remove("is-visible"));
 
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -57,6 +100,8 @@ export function MotionLayer() {
         const scene = target.dataset.scene || "scene-1";
         const progress = Number(visible.intersectionRatio.toFixed(2));
 
+        document.body.dataset.focus = focus;
+        document.body.dataset.scene = scene;
         window.dispatchEvent(new CustomEvent("sharpe-focus-change", { detail: { focus } }));
         window.dispatchEvent(new CustomEvent("sharpe-scene-change", { detail: { scene, progress } }));
       },
@@ -78,6 +123,42 @@ export function MotionLayer() {
       const progress = Math.min(1, window.scrollY / maxScroll);
       document.documentElement.style.setProperty("--scroll-progress", progress.toFixed(4));
       document.body.classList.toggle("has-scrolled", window.scrollY > 24);
+
+      const viewportCenter = window.innerHeight * 0.52;
+
+      scrollReactiveTargets.forEach((target, index) => {
+        const rect = target.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = (center - viewportCenter) / Math.max(window.innerHeight, 1);
+        const clamped = Math.max(-1, Math.min(1, distance));
+        const intensity = 1 - Math.min(1, Math.abs(clamped));
+        const direction = index % 2 === 0 ? 1 : -1;
+
+        target.style.setProperty("--scroll-shift", `${(-clamped * 24).toFixed(2)}px`);
+        target.style.setProperty("--scroll-tilt", `${(clamped * 2.2 * direction).toFixed(2)}deg`);
+        target.style.setProperty("--scroll-scale", `${(1 + intensity * 0.018).toFixed(4)}`);
+      });
+
+      mediaTargets.forEach((target, index) => {
+        const rect = target.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = (center - viewportCenter) / Math.max(window.innerHeight, 1);
+        const clamped = Math.max(-1, Math.min(1, distance));
+        const direction = index % 2 === 0 ? 1 : -1;
+
+        target.style.setProperty("--media-pan", `${(-clamped * 18 * direction).toFixed(2)}px`);
+        target.style.setProperty("--media-zoom", `${(1.035 + (1 - Math.abs(clamped)) * 0.03).toFixed(4)}`);
+      });
+
+      sceneTargets.forEach((target) => {
+        const rect = target.getBoundingClientRect();
+        const visibleTop = Math.max(0, Math.min(window.innerHeight, rect.top));
+        const visibleBottom = Math.max(0, Math.min(window.innerHeight, rect.bottom));
+        const visible = Math.max(0, visibleBottom - visibleTop);
+        const sceneProgress = Math.max(0, Math.min(1, visible / Math.max(rect.height, 1)));
+        target.style.setProperty("--scene-progress", sceneProgress.toFixed(4));
+      });
+
       frame = window.requestAnimationFrame(updateScrollState);
     };
 
@@ -89,12 +170,15 @@ export function MotionLayer() {
       sceneObserver.disconnect();
       motion?.destroy?.();
     };
-  }, [paperReady, directorReady]);
+  }, [paperReady, directorReady, pathname]);
 
   return (
     <>
       <div aria-hidden="true" className="motion-root">
         <canvas className="paper-stage" id="paper-hero-stage" />
+        <div className="focus-glow glow-a" />
+        <div className="focus-glow glow-b" />
+        <div className="focus-glow glow-c" />
         <div className="noise-layer" />
         <div className="scanline-layer" />
       </div>

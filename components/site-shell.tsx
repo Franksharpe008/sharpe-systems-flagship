@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 
-import { audioTracks, navItems } from "@/lib/site";
+import { audioTracks, navItems, stockStills, stockVideos } from "@/lib/site";
 
 import { AudioDock } from "./audio-dock";
 import { MotionLayer } from "./motion-layer";
@@ -26,6 +26,11 @@ export function SiteShell({
   }, [pathname]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.style.setProperty("--scroll-progress", "0");
+  }, [pathname]);
+
+  useEffect(() => {
     document.body.classList.toggle("menu-open", menuOpen);
     return () => document.body.classList.remove("menu-open");
   }, [menuOpen]);
@@ -33,6 +38,9 @@ export function SiteShell({
   return (
     <main className="flagship-shell multi-page-shell">
       <MotionLayer />
+      <div aria-hidden="true" className="progress-ribbon">
+        <span />
+      </div>
 
       <header className="site-nav" data-reveal>
         <Link className="brand-lockup" href="/">
@@ -123,22 +131,95 @@ export function SiteShell({
 
       {children}
 
-      <footer className="site-footer">
-        <div className="footer-copy" data-reveal>
-          <p className="eyebrow">Sharpe Systems</p>
-          <h2>The front end should feel as serious as the operation behind it.</h2>
-          <p>
-            Strong businesses should not be undersold by weak narrative, thin proof, or generic
-            digital surfaces.
-          </p>
-        </div>
-        <div className="footer-actions" data-reveal>
-          <Link className="primary-button" href="/contact">
-            Enter the build queue
-          </Link>
-          <a className="ghost-button" href="mailto:franksharpe008@gmail.com">
-            franksharpe008@gmail.com
-          </a>
+      <footer className="site-footer" data-focus="premium" data-scene="scene-5">
+        <div className="site-footer-shell">
+          <div className="footer-copy" data-reveal>
+            <p className="eyebrow">Sharpe Systems</p>
+            <h2>The front end should feel as serious, fluid, and deliberate as the operation behind it.</h2>
+            <p>
+              Strong businesses should not be undersold by weak narrative, thin proof, shallow
+              interaction, or generic digital surfaces.
+            </p>
+            <div className="footer-actions">
+              <Link className="primary-button" href="/contact">
+                Enter the build queue
+              </Link>
+              <a className="ghost-button" href="mailto:franksharpe008@gmail.com">
+                franksharpe008@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <div className="footer-grid" data-reveal>
+            <div className="footer-column">
+              <span className="footer-label">Routes</span>
+              <div className="footer-link-stack">
+                {navItems.map((item) => (
+                  <Link className="footer-link" href={item.href} key={item.href}>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="footer-column">
+              <span className="footer-label">Build signals</span>
+              <div className="footer-metric-list">
+                <article>
+                  <span>Motion</span>
+                  <strong>Directed, layered, and restrained</strong>
+                </article>
+                <article>
+                  <span>Proof</span>
+                  <strong>Live surfaces over generic praise</strong>
+                </article>
+                <article>
+                  <span>Action</span>
+                  <strong>Qualification after conviction</strong>
+                </article>
+              </div>
+            </div>
+
+            <div className="footer-column footer-column-accent">
+              <span className="footer-label">Operator note</span>
+              <p>
+                The strongest builds keep the story, the visuals, and the next move aligned all the
+                way to the footer.
+              </p>
+            </div>
+          </div>
+
+          <div className="footer-media-grid" data-reveal>
+            <article className="footer-media-card footer-media-card-large">
+              <video autoPlay loop muted playsInline poster={stockStills.boardroomNocturne}>
+                <source src={stockVideos.boardroomNocturne} type="video/mp4" />
+              </video>
+              <div className="footer-media-copy">
+                <span>Premium close</span>
+                <strong>Finish the site with another live scene, not dead space.</strong>
+              </div>
+            </article>
+
+            <div className="footer-media-stack">
+              <article className="footer-media-card">
+                <video autoPlay loop muted playsInline poster={stockStills.authorityOrbit}>
+                  <source src={stockVideos.authorityOrbit} type="video/mp4" />
+                </video>
+                <div className="footer-media-copy">
+                  <span>Signal field</span>
+                  <strong>Motion should still be alive at the close.</strong>
+                </div>
+              </article>
+
+              <article className="footer-media-card footer-media-card-still">
+                <img alt="Sharpe Systems authority bridge visual" src={stockStills.commandFloorLoop} />
+                <div className="footer-media-copy">
+                  <span>Final read</span>
+                  <strong>Premium should feel intentional all the way down.</strong>
+                </div>
+              </article>
+            </div>
+          </div>
         </div>
       </footer>
 

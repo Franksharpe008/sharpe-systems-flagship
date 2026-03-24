@@ -1,0 +1,18 @@
+[
+  {
+    "speaker": "magnus",
+    "slug": "operator-brief-v4",
+    "wav": "/Users/franksharpe/Documents/New project/sharpe-systems-flagship/public/media/operator-brief-v4.wav",
+    "mp3": "/Users/franksharpe/Documents/New project/sharpe-systems-flagship/public/media/operator-brief-v4.mp3",
+    "duration_seconds": 8.62,
+    "median_pitch_hz": 116.505
+  },
+  {
+    "speaker": "max",
+    "slug": "operator-systems-v4",
+    "wav": "/Users/franksharpe/Documents/New project/sharpe-systems-flagship/public/media/operator-systems-v4.wav",
+    "mp3": "/Users/franksharpe/Documents/New project/sharpe-systems-flagship/public/media/operator-systems-v4.mp3",
+    "duration_seconds": 7.35,
+    "median_pitch_hz": 117.647
+  }
+]

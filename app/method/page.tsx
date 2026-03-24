@@ -1,28 +1,10 @@
 import Link from "next/link";
 
-import { AnimatedWord } from "@/components/animated-word";
+import { KineticHeading } from "@/components/kinetic-heading";
+import { MethodMap } from "@/components/method-map";
 import { PageHero } from "@/components/page-hero";
 import { SiteShell } from "@/components/site-shell";
-import { fusionImages, stockStills, stockVideos } from "@/lib/site";
-
-const steps = [
-  {
-    title: "Read the market",
-    body: "Audit the category, the buyer hesitation, the visual language, and the places where the current surface bleeds trust."
-  },
-  {
-    title: "Frame the story",
-    body: "Decide what the first screen should make a qualified buyer feel, understand, and do next."
-  },
-  {
-    title: "Build the media system",
-    body: "Create custom imagery, video moments, and voice layers that make the brand feel authored instead of templated."
-  },
-  {
-    title: "Install the path",
-    body: "Connect the page to diagnosis, qualification, and follow-through so the experience behaves like a real system."
-  }
-];
+import { methodMetrics, methodSteps, stockStills, stockVideos } from "@/lib/site";
 
 export default function MethodPage() {
   return (
@@ -39,55 +21,79 @@ export default function MethodPage() {
           </>
         }
         eyebrow="Method"
-        mediaSrc={stockVideos.laptop}
-        poster={stockStills.laptop}
+        mediaSrc={stockVideos.commandGrid}
+        metrics={methodMetrics}
+        poster={stockStills.commandGrid}
+        rail={
+          <div className="hero-rail-grid compact">
+            <article className="hero-rail-card">
+              <span>Stage 01</span>
+              <strong>Read what the market is telling the buyer.</strong>
+            </article>
+            <article className="hero-rail-card">
+              <span>Stage 04</span>
+              <strong>Wire the page so the next move already makes sense.</strong>
+            </article>
+          </div>
+        }
         side={
           <>
             <p className="eyebrow">How the build moves</p>
-            <h2>Every serious project starts with a category read, not a color palette.</h2>
+            <h2>Every serious flagship starts with the read, not the layout.</h2>
             <p>
-              The method turns research into a surface, then turns the surface into a stronger next
-              step for the buyer.
+              The method turns category pressure into story, media, interaction, and an action path
+              that behaves like an operating lane.
             </p>
           </>
         }
         summary="The Sharpe Systems method is designed to make premium sites feel deliberate from the first second instead of patched together from isolated assets."
         title={
           <h1 className="hero-title page-title-tight">
-            Start with the read.
-            <br />
-            Build the <AnimatedWord word="shift" />.
+            <KineticHeading accent="shift" lines={["Start with the read.", "Build the shift."]} />
           </h1>
         }
+        variant="proof"
       />
 
       <section className="timeline-section" data-focus="appointments" data-scene="scene-2">
         <div className="section-heading" data-reveal>
           <p className="eyebrow">Four-stage motion</p>
-          <h2>The method is meant to keep the page clean while the strategy stays deep.</h2>
+          <h2>The system keeps the page clean while the thinking, media, and qualification stay deep.</h2>
         </div>
-        <div className="timeline-grid">
-          {steps.map((step, index) => (
-            <article className="timeline-card" data-reveal key={step.title}>
-              <span className="timeline-index">0{index + 1}</span>
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
-            </article>
-          ))}
-        </div>
+        <MethodMap steps={methodSteps} />
       </section>
 
       <section className="split-story-section" data-focus="premium" data-scene="scene-3">
         <div className="split-story-copy" data-reveal>
           <p className="eyebrow">Why it works</p>
-          <h2>The buyer feels the difference before they can explain it in words.</h2>
+          <h2>The buyer feels the shift before they can explain it in words.</h2>
           <p>
-            Better rhythm, better imagery, better proof order, better restraint. Those signals
-            create more calm, more trust, and more willingness to keep going.
+            Better rhythm, better imagery, stronger proof staging, and a cleaner action path create
+            more calm, more trust, and more willingness to keep going.
           </p>
         </div>
         <div className="split-story-visual" data-reveal>
-          <img alt="Sharpe Systems boardroom visual" src={fusionImages.boardroomNight} />
+          <video autoPlay loop muted playsInline poster={stockStills.boardroomNocturne}>
+            <source src={stockVideos.boardroomNocturne} type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section className="media-mosaic-section compact" data-focus="premium" data-scene="scene-4">
+        <div className="media-mosaic two-up">
+          <article className="media-mosaic-tile video-tile" data-reveal>
+            <video autoPlay loop muted playsInline poster={stockStills.signalPulse}>
+              <source src={stockVideos.signalPulse} type="video/mp4" />
+            </video>
+          </article>
+          <article className="media-mosaic-tile note-tile" data-reveal>
+            <p className="eyebrow">Method note</p>
+            <h3>Premium builds feel clear because the method controls sequence, not because the page has more stuff.</h3>
+            <p>
+              Research decides the story, story decides the media, media decides the pacing, and
+              the pacing shapes whether the right buyer keeps going.
+            </p>
+          </article>
         </div>
       </section>
     </SiteShell>

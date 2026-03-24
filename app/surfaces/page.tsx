@@ -1,8 +1,10 @@
 import Link from "next/link";
 
+import { KineticHeading } from "@/components/kinetic-heading";
 import { PageHero } from "@/components/page-hero";
 import { SiteShell } from "@/components/site-shell";
-import { fusionImages, stockStills, stockVideos } from "@/lib/site";
+import { SurfaceGallery } from "@/components/surface-gallery";
+import { fusionImages, stockStills, stockVideos, surfaceScenes } from "@/lib/site";
 
 const surfaceNotes = [
   "Custom visual art for premium story moments",
@@ -26,8 +28,20 @@ export default function SurfacesPage() {
           </>
         }
         eyebrow="Surfaces"
-        mediaSrc={stockVideos.boardroom}
-        poster={stockStills.boardroom}
+        mediaSrc={stockVideos.signalPulse}
+        poster={stockStills.signalPulse}
+        rail={
+          <div className="hero-rail-grid compact">
+            <article className="hero-rail-card">
+              <span>Stills</span>
+              <strong>Placed to carry hierarchy, not fill space</strong>
+            </article>
+            <article className="hero-rail-card">
+              <span>Loops</span>
+              <strong>Used where motion raises authority and pacing</strong>
+            </article>
+          </div>
+        }
         side={
           <>
             <p className="eyebrow">Media rule</p>
@@ -40,10 +54,23 @@ export default function SurfacesPage() {
           </>
         }
         summary="This page is the media layer: custom stills, stock loops, and detail shots arranged the way a flagship site should actually use them."
-        title={<h1 className="hero-title page-title-tight">Make the visuals feel commissioned.</h1>}
+        title={
+          <h1 className="hero-title page-title-tight">
+            <KineticHeading accent="commissioned" lines={["Make the visuals", "feel commissioned."]} />
+          </h1>
+        }
+        variant="editorial"
       />
 
       <section className="showcase-section" data-focus="premium" data-scene="scene-2">
+        <div className="section-heading" data-reveal>
+          <p className="eyebrow">Media selector</p>
+          <h2>Choose the scene language and watch the surface shift with it.</h2>
+        </div>
+        <SurfaceGallery scenes={surfaceScenes} />
+      </section>
+
+      <section className="showcase-section" data-focus="premium" data-scene="scene-3">
         <div className="showcase-grid wide">
           <article className="showcase-panel image-panel" data-reveal>
             <img alt="Luxury command-floor visual" src={fusionImages.commandFloor} />
@@ -55,8 +82,8 @@ export default function SurfacesPage() {
             <img alt="Premium boardroom-at-night visual" src={fusionImages.boardroomNight} />
           </article>
           <article className="showcase-panel video-panel" data-reveal>
-            <video autoPlay loop muted playsInline poster={stockStills.tunnel}>
-              <source src={stockVideos.tunnel} type="video/mp4" />
+            <video autoPlay loop muted playsInline poster={stockStills.portraitSweep}>
+              <source src={stockVideos.portraitSweep} type="video/mp4" />
             </video>
           </article>
         </div>
