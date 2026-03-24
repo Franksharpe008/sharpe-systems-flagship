@@ -16,9 +16,12 @@ const body = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Sharpe Systems | Premium Surfaces That Move",
+  title: {
+    default: "Sharpe Systems | Premium Surfaces That Move",
+    template: "%s | Sharpe Systems"
+  },
   description:
-    "Sharpe Systems rebuilds weak business fronts into sharper authority systems with motion, proof, story, and follow-through that creates real movement."
+    "Sharpe Systems builds premium multi-page business surfaces with stronger motion, sharper proof, richer media, and cleaner lead progression."
 };
 
 export default function RootLayout({
@@ -27,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html data-scroll-behavior="smooth" lang="en">
       <body className={`${display.variable} ${body.variable}`}>{children}</body>
     </html>
   );
